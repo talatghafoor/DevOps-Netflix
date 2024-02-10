@@ -1,4 +1,3 @@
-
 pipeline{
     agent any
     tools{
@@ -45,11 +44,11 @@ pipeline{
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-        stage('TRIVY FS SCAN') {
-            steps {
-                sh "trivy fs . > trivyfs.txt"
-            }
-        }
+        // stage('TRIVY FS SCAN') {
+        //     steps {
+        //         sh "trivy fs . > trivyfs.txt"
+        //     }
+        // }
         stage("Docker Build & Push"){
             steps{
                 script{
@@ -63,7 +62,7 @@ pipeline{
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image nasi101/netflix:latest > trivyimage.txt" 
+                sh "trivy image talatghoor/netflix:latest > trivyimage.txt" 
             }
         }
         stage('Deploy to container'){
