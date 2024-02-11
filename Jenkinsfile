@@ -26,13 +26,13 @@ pipeline{
                 }
             }
         }
-        // stage("quality gate"){
-        //    steps {
-        //         script {
-        //             waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
-        //         }
-        //     } 
-        // }
+        stage("quality gate"){
+           steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+            } 
+        }
         stage('Install Dependencies') {
             steps {
                 sh "npm install"
@@ -52,7 +52,7 @@ pipeline{
         stage('Docker Build & Run') {
             steps {
                 script {
-                    sh "docker build --build-arg TMDB_V3_API_KEY=d8c74462b990201fd8346ad46264a3b8 -t netflix ."
+                    sh "docker build --build-arg TMDB_V3_API_KEY=<Your API Key> -t netflix ."
                     sh "docker run -d -p 8081:80 netflix"
                 }
             }
