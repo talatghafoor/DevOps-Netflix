@@ -59,7 +59,7 @@ pipeline{
         }        
         stage("TRIVY"){
             steps{
-                sh "trivy image talatghoor/netflix:latest > trivyimage.txt" 
+                sh "trivy image netflix > trivyimage.txt" 
             }
         }
     }
